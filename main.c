@@ -5,7 +5,38 @@
 ** Project test main.
 */
 
-int main(void)
+#include "essentials.h"
+#include "printf.h"
+#include "matchstick.h"
+
+static int print_help(char **av);
+
+int main(int ac, char **av , char **env)
 {
-    return (0);
+    int matches = 0;
+    int board = 0;
+
+    if (!(*env))
+        return ERROR;
+    if (ac == 2 && (my_strcmp_alpha(av[1], "-Help") == EQUAL))
+        return (print_help(av));
+    if (ac == 3 && !check_args(av[1]) && !check_args(av[2])) {
+        if ((board = get_board_size(av[1])) &&
+            (matches = get_matches_max(av[2]))) {
+            return (matchstick(board, matches));
+        } else
+            my_printf("Wrong arguments, type '%s -help' for usage\n", av[0]);
+    } else
+        my_printf("Wrong arguments, type '%s -help' for usage\n", av[0]);
+    return (ERROR);
+}
+
+static int print_help(char **av)
+{
+    my_printf("Usage:\n");
+    my_printf("\t%s\tBoard size\t", av[0]);
+    my_printf("Maximum numbers of matches that can be removed per turn.\n");
+    my_printf("Board size must be between 1 and 100.\n");
+    my_printf("Number of maximum matches must be coherent.\n");
+    return SUCCESS;
 }
