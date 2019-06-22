@@ -17,9 +17,9 @@ int ia_turn(char **map)
 {
     int rt = -42;
 
+    my_printf("AI's turn...\n");
     if ((rt = uneven(map)) == NIM)
         return IA_WIN;
-    my_printf("AI's turn...\n");
     if ((rt = even(map)) == NIM)
         return IA_WIN;
     for (int i = get_bs(NO, true); map[i]; --i) {
