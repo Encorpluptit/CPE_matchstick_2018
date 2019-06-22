@@ -8,8 +8,18 @@
 #include "essentials.h"
 #include "printf.h"
 #include "matchstick.h"
+#include "globals.h"
 
 static int print_help(char **av);
+
+__attribute__((destructor)) void end(void)
+{
+    char **map = get_map(NULL, GIVE);
+
+    for (int i = 1; i <= get_bs(NO, true) + 2; ++i)
+        free(map[i]);
+    free(map);
+}
 
 int main(int ac, char **av , char **env)
 {

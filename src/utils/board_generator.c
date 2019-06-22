@@ -5,7 +5,6 @@
 ** Function that take board_size and return map.
 */
 
-#include "../../tests/include/tests_run.h"
 #include <stdlib.h>
 #include "matchstick.h"
 #include "board_generation.h"
