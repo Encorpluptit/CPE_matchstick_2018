@@ -72,7 +72,6 @@ static inline size_t check_flag(va_list argv_list, char const flag)
     return printed;
 }
 
-
 //<===============================================>
 // Printf flag functions.
 static inline size_t printf_int(va_list argv_list)

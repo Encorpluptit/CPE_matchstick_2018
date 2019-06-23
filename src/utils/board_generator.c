@@ -39,7 +39,7 @@ static char **alloc_map(int board_size)
             free(map);
             return (NULL);
         }
-        map[LINE_BS(board_size)] = '\0';
+        map[i][LINE_BS(board_size)] = '\0';
     }
     map[i] = NULL;
     return map;

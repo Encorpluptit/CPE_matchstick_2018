@@ -9,82 +9,68 @@
 #include "printf.h"
 #include "ia.h"
 
-static int uneven(char **map);
-static int even(char **map);
-static int hellsing(char *line, int i);
+static int uneven(char **map, map_t map_info);
+static int even(char **map, map_t map_info);
+static int play_ia_move(char *map_line, int matches, int line);
 
 int ia_turn(char **map)
 {
-    int rt = -42;
+    int rt = FAIL;
+    map_t map_info = get_map_info(map);
 
     my_printf("AI's turn...\n");
-    if ((rt = uneven(map)) == NIM)
-        return IA_WIN;
-    if ((rt = even(map)) == NIM)
-        return IA_WIN;
-    for (int i = get_bs(NO, true); map[i]; --i) {
-        if (hellsing(map[i], i) == NIM)
-            return (IA_WIN);
+    if (!TAB)
+        return FAIL;
+    if (NB_LINE % 2 == 1) {
+        if ((rt = uneven(map, map_info) == PLAYER_WIN))
+            return PLAYER_WIN;
     }
-    return rt;
+    if (NB_LINE % 2 == 0) {
+        if ((rt = even(map, map_info) == PLAYER_WIN))
+            return PLAYER_WIN;
+    }
+    return (play_ia_move(map[MAX_MAP_LINE], 1, MAX_MAP_LINE));
 }
 
-static int uneven(char **map)
+static int uneven(char **map, map_t map_info)
 {
-    int line_filled = 0;
-    int index = 0;
-    int stop = 0;
-    int nb_line = ia_count_line(map, &line_filled, &index, &stop);
-    int res = 0;
-    char *line = NULL;
-
-    if ((nb_line != 1 && stop == FAIL) || (nb_line % 2) != 1)
-        return NOP;
-    if (check_ia_move(map[index], NO) == NIM) {
-        line = map[index];
-        res = check_matches_in_line(line)  - NO;
-        remove_line(&line, res);
-        get_matches(NO, SUB, res);
-        my_printf("AI removed %d match(es) from line %d\n", res, index + 1);
-        return NIM;
-    }
+    if (LINE_FILLED == 2 || LINE_FILLED == 3)
+        return (play_ia_move(map[MAX_MAP_LINE], 1, MAX_MAP_LINE));
+    if (line_filled(map_info) && (TAB[MAX_INDEX] <= (get_mm(NO, true) + 1)))
+        return (play_ia_move(map[MAX_MAP_LINE], REMOVE(TAB[MAX_INDEX]) - 1,
+                            MAX_MAP_LINE));
+    if (line_filled(map_info) && (TAB[MAX_INDEX] > (get_mm(NO, true))))
+        return (play_ia_move(map[MAX_MAP_LINE], 1, MAX_MAP_LINE));
     return FAIL;
 }
 
-static int even(char **map)
+static int even(char **map, map_t map_info)
 {
-    int line_filled = 0;
-    int index = 0;
-    int stop = 0;
-    int nb_line = ia_count_line(map, &line_filled, &index, &stop);
-    int res = 0;
-    char *line = NULL;
+    int matches = get_mm(NO, true);
 
-    if ((nb_line != 2 && stop == FAIL) || (nb_line % 2) != 0)
-        return NOP;
-    if (check_ia_move(map[index], VAR) == NIM) {
-        line = map[index];
-        res = check_matches_in_line(line)  - NO;
-        remove_line(&line, res);
-        get_matches(NO, SUB, res);
-        my_printf("AI removed %d match(es) from line %d\n", res, index + 1);
-        return NIM;
-    }
+    if (LINE_FILLED == 1 && NB_LINE == 2 && (square(map_info)))
+        return (play_ia_move(map[MAX_MAP_LINE], REMOVE(TAB[MAX_INDEX]),
+                                MAX_MAP_LINE));
+    if (LINE_FILLED == 1 && NB_LINE == 2 && can_remove(map_info))
+        return (play_ia_move(map[MAX_MAP_LINE], REMOVE(TAB[MAX_INDEX]),
+                                MAX_MAP_LINE));
+    if (LINE_FILLED == 1 && NB_LINE == 2 && (!square(map_info)))
+        return (play_ia_move(map[MAX_MAP_LINE], 1, MAX_MAP_LINE));
+    if (NB_LINE == LINE_FILLED && (get_matches(NO, RETURN, NO) > (matches * 2)))
+        return (play_ia_move(map[MAX_MAP_LINE], REMOVE(TAB[MAX_INDEX]),
+                                MAX_MAP_LINE));
+    if (NB_LINE >= 2 && (square(map_info)))
+        return (play_ia_move(map[MAX_MAP_LINE], REMOVE(TAB[MAX_INDEX]),
+                                MAX_MAP_LINE));
+    if (NB_LINE >= 2 && (!square(map_info)))
+        return (play_ia_move(map[MAX_MAP_LINE], 1, MAX_MAP_LINE));
     return FAIL;
 }
 
-static int hellsing(char *line, int i)
+static int play_ia_move(char *map_line, int matches, int line)
 {
-    int res = 0;
-
-    res = check_matches_in_line(line);
-    if (res > 0) {
-        if (res > get_mm(NO, true))
-            res = get_mm(NO, true);
-        remove_line(&line, res);
-        get_matches(NO, SUB, res);
-        my_printf("AI removed %d match(es) from line %d\n", res, i);
-        return NIM;
-    }
-    return FAIL;
+    remove_line(&map_line, matches);
+    get_matches(NO, SUB, matches);
+    my_printf("AI removed %d match(es) from line %d\n", matches, line);
+    return PLAYER_WIN;
 }

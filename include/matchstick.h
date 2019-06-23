@@ -38,8 +38,8 @@ static const uint8_t IA_WIN = 2;
 static const int CTRLD = 0;
 
 UNUSED static const char *PWIN = "I lost... snif... \
-but I'll get you next time!!\n";
-UNUSED static const char *TERMINATOR = "You lost, too bad...\n";
+but I'll get you next time!!";
+UNUSED static const char *TERMINATOR = "You lost, too bad...";
 
 #define INVALID_MATCHES "Error: invalid input (positive number expected)\n"
 #define ZERO_MATCHES "Error: you have to remove at least one match\n"

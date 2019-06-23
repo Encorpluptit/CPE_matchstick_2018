@@ -24,12 +24,10 @@ int player_turn(void)
         return IA_WIN;
     my_printf("Your turn:\n");
     do {
-        if ((rt = player_line_select()) == FAILED_MALLOC) {
-            my_printf("\n");
+        if ((rt = player_line_select()) == FAILED_MALLOC)
             return (CTRLD);
-        }
     } while (rt != PLAYER_WIN);
-    return (rt);
+    return (rt == PLAYER_WIN ? IA_WIN : PLAYER_WIN);
 }
 
 static int player_line_select(void)

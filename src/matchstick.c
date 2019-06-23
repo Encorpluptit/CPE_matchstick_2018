@@ -26,10 +26,13 @@ int matchstick(int board_size, int matches_max)
             break;
         my_printf("%w\n", map);
         win = ia_turn(map);
-        if (get_matches(board_size, RETURN, NO) <= 0 || win == CTRLD)
+        if (get_matches(board_size, RETURN, NO) <= 0)
             break;
     } while (get_matches(board_size, RETURN, NO) > 0);
-    my_printf("%w\n", map);
+    if (win == CTRLD)
+        return (get_map(NULL, FREE) ? CTRLD : CTRLD);
+    my_printf("%w", map);
+    get_map(NULL, FREE);
     return (print_victory(win));
 }
 
@@ -50,6 +53,6 @@ static int print_victory(int win)
 {
     if (win == CTRLD)
         return SUCCESS;
-    my_printf("%s\n", win == 1 ? TERMINATOR : PWIN);
+    my_printf("%s\n", win == 1 ? PWIN : TERMINATOR);
     return win;
 }

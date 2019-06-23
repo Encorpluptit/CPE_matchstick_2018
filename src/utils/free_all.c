@@ -20,7 +20,7 @@ char **get_map(char **map, fct_map_flag_t flag)
     if (flag == GIVE)
         return map_save;
     if (flag == FREE) {
-        for (int i = 0; map_save[i]; ++i)
+        for (int i = 1; map_save[i]; ++i)
             map_save[i] ? free(map_save[i]) : 0;
         free(map_save);
         return NULL;

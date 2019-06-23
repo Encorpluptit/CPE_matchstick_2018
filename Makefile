@@ -38,11 +38,11 @@ MAIN_FILE		= 	main.c	\
 				src/player/player.c	\
 				src/matchstick.c	\
 				src/utils/free_all.c	\
+				src/computer/ia_core.c
 
 
 SRC_FILES		=	utils/globals.c	\
 				utils/board_generator.c	\
-				computer/ia_core.c
 
 LIB_FILES		=	my_str_isnum.c	\
 				my_atoi.c	\
