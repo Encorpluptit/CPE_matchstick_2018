@@ -35,7 +35,7 @@ int main(int ac, char **av , char **env)
 static int print_help(char **av)
 {
     my_printf("Usage:\n");
-    my_printf("\t%s\tBoard size\t", av[0]);
+    my_printf("\t%s\t Board size\t", av[0]);
     my_printf("Maximum numbers of matches that can be removed per turn.\n");
     my_printf("Board size must be between 1 and 100.\n");
     my_printf("Number of maximum matches must be coherent.\n");
