@@ -15,6 +15,15 @@
 #define HIDDEN __attribute__ ((visibility ("hidden")))
 #endif /* HIDDEN */
 
+
+#ifndef DESTRUCTOR
+#define DESTRUCTOR __attribute__((destructor))
+#endif /* DESTRUCTOR */
+
+#ifndef CONSTRUCTOR
+#define CONSTRUCTOR __attribute__((constructor))
+#endif /* CONSTRUCTOR */
+
 #ifndef _PRINTF_
 #define _PRINTF_
 
@@ -173,7 +182,7 @@ static inline size_t my_put_nbr(long long nb)
         printed += my_put_nbr(nb / 10);
     }
     printed += my_putchar(nb % 10 + '0');
-    return printed;
+    return (printed);
 }
 
 static inline size_t my_put_nbr_base(unsigned int nb, char const *base)
@@ -200,3 +209,5 @@ static inline size_t my_print_strlen(char const *str)
 }
 
 #endif /* _PRINTF_ */
+
+//lol

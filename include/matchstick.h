@@ -20,6 +20,7 @@
 #define _STATICS_CONST_RETURN_
 #include <stddef.h>
 static const int ERROR = 84;
+static const int NOT_VALID = -42;
 static const int SUCCESS = 0;
 UNUSED static const char *MALLOC_FAILED = NULL;
 #endif /* _STATICS_CONST_RETURN_ */
@@ -37,8 +38,8 @@ static const uint8_t PLAYER_WIN = 1;
 static const uint8_t IA_WIN = 2;
 static const int CTRLD = 0;
 
-UNUSED static const char *PWIN = "I lost... snif... \
-but I'll get you next time!!";
+UNUSED static const char *PWIN = "I lost... snif... "
+    "but I'll get you next time!!";
 UNUSED static const char *TERMINATOR = "You lost, too bad...";
 
 #define INVALID_MATCHES "Error: invalid input (positive number expected)\n"
