@@ -4,7 +4,8 @@ Leave the last matchstick ! (End of project 23/06/19)
 Experience in C : 4 months.
 
 ## The project 
-[Project subject.](/Project/B-CPE-111_Matchstick.pdf)
+
+[Project subject.](/Project/B-PSU-200_navy.pdf)
 
 The goal of the project is to create a program that you can play against.
 
@@ -22,7 +23,7 @@ The user will always start the game.
 
 The program’s output (error messages included) must correspond to the examples below.
 
-Error messageswhich happens during a game and which are destined to the player must be displayed on the standardoutput.
+Error messages which happens during a game and which are destined to the player must be displayed on the standardoutput.
 
 In case of bad input, you must ask for the line by displaying “Line:” again, and it’s up to the player to indicate again the line he/she wants to play on.
 
