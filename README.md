@@ -31,8 +31,7 @@ In case of bad input, you must ask for the line by displaying “Line:” again,
 
 ## Example
 
-
-
+![Game Example](/Project/B-CPE-111_Matchstick_examples.txt)
 ![Game Example](/Project/Game_Example.png)
 
 
