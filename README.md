@@ -5,6 +5,7 @@ Experience in C : 4 months.
 
 ## The project 
 [Project subject.](/Project/B-CPE-111_Matchstick.pdf)
+
 The goal of the project is to create a program that you can play against.
 
 The basic version must generate a game board withnmatchstick lines (1 < n < 100) and have a simple inter-face so that the user could play against the computer.
